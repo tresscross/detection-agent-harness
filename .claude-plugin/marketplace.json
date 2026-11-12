@@ -1,0 +1,14 @@
+{
+  "name": "detection-agent-harness",
+  "description": "Skill suite for running the detection engineering lifecycle with coding agents, on any SIEM.",
+  "owner": {
+    "name": "tresscross"
+  },
+  "plugins": [
+    {
+      "name": "detection-harness",
+      "source": "./plugin",
+      "description": "Platform-agnostic detection engineering lifecycle for coding agents."
+    }
+  ]
+}

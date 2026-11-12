@@ -1,0 +1,17 @@
+{
+  "name": "detection-harness",
+  "version": "0.1.0",
+  "description": "Platform-agnostic detection engineering lifecycle for coding agents: draft, validate, test, submit. Hook up your own rules repo, linter, SIEM and log-source docs via DETECTION.md.",
+  "author": {
+    "name": "tresscross",
+    "url": "https://tresscross.blog/"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "detection-engineering",
+    "detection-as-code",
+    "siem",
+    "sigma",
+    "security"
+  ]
+}

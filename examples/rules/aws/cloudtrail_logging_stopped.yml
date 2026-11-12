@@ -1,0 +1,38 @@
+# EXAMPLE rule for the fictional Example Corp (see examples/DETECTION.md).
+title: CloudTrail Logging Stopped or Trail Deleted
+id: 371d06fc-5b38-4fab-bb58-a92e5c5c0412
+status: experimental
+description: >
+  Detects a principal stopping CloudTrail logging or deleting a trail. Turning off the audit
+  log is a chokepoint for most AWS intrusions: an attacker who wants to act unseen in the
+  control plane has to blind it first, and legitimate changes to trails are rare and planned.
+references:
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html
+  - https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteTrail.html
+author: Example Corp Detection Engineering
+date: 2026-11-12
+tags:
+  - attack.defense-evasion
+  - attack.t1562.008
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName:
+      - StopLogging
+      - DeleteTrail
+  condition: selection
+falsepositives:
+  - Planned trail migrations by the cloud platform team (expect a change ticket).
+level: high
+x-harness:
+  state: deployed
+  owner: detection-engineering
+  notes: |
+    Failed attempts (errorCode set) are kept on purpose: an attempt to blind logging is
+    worth an alert even when IAM denies it.
+    Decided against excluding the platform team's deploy role: anyone holding those
+    credentials could use it. Review planned migrations by hand instead.
+    Baseline 2026-11-12: 0.1/day over 30d (within range for high)
